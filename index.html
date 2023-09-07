@@ -1,0 +1,95 @@
+<!DOCTYPE html lang=en>
+
+<head>
+  <title>Text Fly</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function Play() {
+      document.getElementsByTagName('button')[0].getElementsByClassName('spinner')[0].classList.remove('hidden');
+
+      document.getElementById('container').remove();
+      
+  //   }
+  // onload = function() {
+
+      var col = 'lightsteelblue';
+      var d = document;
+      
+      var container = d.createElement('div');
+      container.id = 'container';
+      d.body.appendChild(container);
+
+      function feedin( feed, speed ) {
+        var filter = 0;
+        feed.style.opacity = 0;
+        feed.style.MozOpacity = 0;
+        var timer = setInterval( function() {
+          filter++;
+          feed.style.opacity = (filter / 10);
+          feed.style.MozOpacity = (filter / 10);
+          if (filter == 10) { clearInterval(timer); }
+        }, speed);
+      }
+
+      var str = [
+[49, 97, 145, 193, 241, 146, 51, 99, 147, 195, 243, 53, 101, 149, 197, 245, 54, 150, 246, 55, 151, 247, 57, 105, 153, 201, 249, 250, 251, 61, 109, 157, 205, 253, 254, 255, 65, 113, 161, 209, 257, 66, 258, 67, 115, 163, 211, 259, 71, 119, 167, 215, 264, 169, 217, 266, 75, 123, 171, 219, 77, 125, 173, 221, 269, 78, 270, 79, 127, 175, 223, 271, 81, 129, 177, 225, 273, 82, 178, 83, 131, 227, 275, 85, 133, 181, 229, 277, 278, 279, 89, 137, 185, 233, 281, 90, 282, 139, 187, 235, 94, 142, 190, 286]
+      ]
+
+      for (i=0; i<(48*7); i++) {
+        var box = d.createElement('div');
+        box.className = 'kotak';
+        with(document.getElementById('container').appendChild(box).style) {
+          if (i % 48 == 0){ clear = 'both'; }
+          color = col;
+          border = 'solid color-mix(in srgb, currentColor, transparent 70%) 1px';
+          height = '20px';
+          width = '20px';
+          margin = '2px';
+          float = 'left';
+        }
+      }
+
+      var mess = d.getElementsByClassName('kotak');
+      var i = 0
+      var j = 0;
+      setInterval( function () {
+        if (str[i] != undefined) {
+        feedin( mess[str[i][j]], 25 );
+        mess[ str[i][j] ].style.color = col;
+        mess[ str[i][j] ].style.background = col;
+        mess[ str[i][j] ].classList.add("kotak-hl");
+        // }
+        j++;
+        if ( i == str.length ) { clearInterval(timer); }
+        if ( j == str[i].length ) { i++; j = 0;
+        
+          document.getElementsByTagName('button')[0].getElementsByClassName('spinner')[0].classList.toggle('hidden');
+          // document.getElementsByTagName('button')[0].getElementsByClassName('spinner')[0].classList.add('hidden');
+          return 0
+          // document.getElementsByTagName('button')[0].removeAttribute('onclick');
+        }
+        console.log(i,j);
+
+        }
+      }, 50 );
+
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <!-- <a href="#" onclick="" class="button">Click This Button !!!</a> -->
+
+  <button onclick="Play()">
+    <div class="spinner"></div>
+    Play
+  </button>
+
+  <div id="container">
+  </div>
+
+</body>
+
+</html>
